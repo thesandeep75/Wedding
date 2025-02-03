@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bengali Wedding Invitation</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Include jsPDF and html2canvas Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="fireworks-container">
+            <canvas id="fireworks"></canvas>
+            <canvas id="hearts"></canvas>
+            <canvas id="confetti"></canvas>
+            <div class="container">
+                <h1 class="animated-text">Join Us in Celebrating Love</h1>
+                <p>We invite you to witness the union of two souls</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bride & Groom Section -->
+    <section class="bride-groom">
+        <div class="container">
+            <h2>About the Couple</h2>
+            <div class="couple-profiles">
+                <div class="profile groom">
+                    <img src="images/groom.jpg" alt="Groom" class="profile-image">
+                    <h3>Sandip</h3>
+                    <p>A passionate soul who loves adventure and laughter.</p>
+                </div>
+                <div class="profile bride">
+                    <img src="images/bride.jpg" alt="Bride" class="profile-image">
+                    <h3>Priya</h3>
+                    <p>A kind-hearted dreamer with a love for art and music.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="invitation">
+        <div class="container">
+            <h2>The Wedding of</h2>
+            <h3>Sandip & Priya</h3>
+            <p class="date">Monday, 14th April 2025</p>
+            <p class="time">6:00 PM Onwards</p>
+            <p class="location">
+                Rudrapur City Club,<br>
+                Kashipur Bypass Rd,<br>
+                Near Rudra Continental,<br>
+                Rudrapur, Jagatpura,<br>
+                Uttarakhand 263153
+            </p>
+            <div class="buttons">
+                <button id="downloadInvite" class="btn">Download Invite</button>
+                <a href="https://www.google.com/maps?q=Rudrapur+City+Club,+Kashipur+Bypass+Rd,+Near+Rudra+Continental,+Rudrapur,+Jagatpura,+Uttarakhand+263153" target="_blank" class="btn location-btn">View Location</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details Section -->
+    <section class="details">
+        <div class="container">
+            <h2>Event Highlights</h2>
+            <div class="event-info">
+                <div class="event animate-event">
+                    <div class="event-icon var-mala-icon"></div>
+                    <h3>Var Mala</h3>
+                    <p>6:00 PM - 6:30 PM</p>
+                </div>
+                <div class="event animate-event">
+                    <div class="event-icon ring-icon"></div>
+                    <h3>Ring Ceremony</h3>
+                    <p>6:30 PM - 7:00 PM</p>
+                </div>
+                <div class="event animate-event">
+                    <div class="event-icon phera-icon"></div>
+                    <h3>Phera</h3>
+                    <p>7:00 PM - 7:30 PM</p>
+                </div>
+                <div class="event animate-event">
+                    <div class="event-icon bhoj-icon"></div>
+                    <h3>Bhoj (Dinner)</h3>
+                    <p>7:30 PM - 9:00 PM</p>
+                </div>
+                <div class="event animate-event">
+                    <div class="event-icon vidai-icon"></div>
+                    <h3>Vidai</h3>
+                    <p>9:00 PM - 9:30 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sandip & Priya's Wedding. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Fireworks Script -->
+    <script src="fireworks.js"></script>
+    <!-- Hearts Script -->
+    <script src="hearts.js"></script>
+    <!-- Confetti Script -->
+    <script src="confetti.js"></script>
+    <!-- Text Animation Script -->
+    <script src="text-animation.js"></script>
+    <!-- Download Full Website Content as PDF -->
+    <script>
+        // Wait for the DOM to load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize jsPDF
+            const { jsPDF } = window.jspdf;
+
+            // Handle "Download Invite" button click
+            const downloadButton = document.getElementById('downloadInvite');
+            if (downloadButton) {
+                downloadButton.addEventListener('click', function () {
+                    // Use html2canvas to capture the entire page
+                    html2canvas(document.body).then(canvas => {
+                        // Convert the canvas to an image
+                        const imgData = canvas.toDataURL('image/png');
+
+                        // Create a new PDF document
+                        const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait mode, A4 size
+
+                        // Calculate dimensions for the PDF
+                        const imgWidth = 210; // A4 width in mm
+                        const pageHeight = 297; // A4 height in mm
+                        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                        let heightLeft = imgHeight;
+
+                        // Add the first page to the PDF
+                        let position = 0;
+                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+
+                        // Add additional pages if the content exceeds one page
+                        while (heightLeft >= 0) {
+                            position = heightLeft - imgHeight;
+                            pdf.addPage();
+                            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                            heightLeft -= pageHeight;
+                        }
+
+                        // Save the PDF
+                        pdf.save('Wedding_Invitation.pdf');
+                    });
+                });
+            } else {
+                console.error('Download Invite button not found!');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+header {
+    position: relative;
+    height: 80vh; /* Reduced height for better mobile experience */
+    overflow: hidden;
+    background: url('images/wedding-background.jpg') no-repeat center center/cover;
+    color: #fff;
+
+    /* Fallback background color */
+    background-color: #f8ebe2; /* Soft cream background */
+}
+
+.fireworks-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+header .container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #fff; /* White font color */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Subtle white glow */
+    animation: fadeIn 2s ease-in-out forwards, glow 2s infinite alternate;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* White glow */
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1); /* Brighter white glow */
+    }
+}
+
+header p {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #fff; /* White font color */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Subtle white glow */
+}
+
+/* Bride & Groom Section */
+.bride-groom {
+    background-color: #fff;
+    padding: 50px 0;
+    color: #333;
+}
+
+.bride-groom h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ff9999; /* Soft pink heading */
+}
+
+.couple-profiles {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.profile {
+    width: 45%;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ffcccc; /* Light pink border */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.profile-image:hover {
+    transform: scale(1.1);
+    border-color: #ff9999; /* Darker pink border on hover */
+}
+
+.profile h3 {
+    font-size: 2rem;
+    margin: 10px 0;
+    color: #ff9999; /* Soft pink text */
+}
+
+.profile p {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #666;
+}
+
+/* Invitation Section */
+.invitation {
+    background-color: #fff;
+    padding: 50px 0;
+    color: #333;
+}
+
+.invitation h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #ff9999; /* Soft pink heading */
+}
+
+.invitation h3 {
+    font-size: 3rem;
+    color: #ff9999; /* Soft pink text */
+    margin-bottom: 20px;
+}
+
+.invitation .date, .invitation .time, .invitation .location {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff9999; /* Soft pink button */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    background-color: #ff6666; /* Darker pink on hover */
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.location-btn {
+    background-color: #ffcccc; /* Light pink button */
+}
+
+.location-btn:hover {
+    background-color: #ff9999; /* Soft pink on hover */
+}
+
+/* Event Details Section */
+.details {
+    background-color: #f8ebe2; /* Cream background */
+    padding: 50px 0;
+    color: #333;
+}
+
+.details h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ff9999; /* Soft pink heading */
+}
+
+.event-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.event {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 45%;
+    opacity: 0; /* Start invisible */
+    transform: translateY(20px); /* Start slightly below */
+    animation: fadeInUp 1s ease-in-out forwards;
+}
+
+.animate-event:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.animate-event:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.animate-event:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.animate-event:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.animate-event:nth-child(5) {
+    animation-delay: 1s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Event Icons */
+.event-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-icon:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 153, 153, 0.5); /* Pink shadow */
+}
+
+.var-mala-icon {
+    background-image: url('images/var-mala-icon.png'); /* Floral garland icon */
+}
+
+.ring-icon {
+    background-image: url('images/ring-icon.png'); /* Ring icon */
+}
+
+.phera-icon {
+    background-image: url('images/phera-icon.png'); /* Fire/flame icon */
+}
+
+.bhoj-icon {
+    background-image: url('images/bhoj-icon.png'); /* Plate/food icon */
+}
+
+.vidai-icon {
+    background-image: url('images/vidai-icon.png'); /* Car/farewell icon */
+}
+
+/* Footer */
+footer {
+    background-color: #f8ebe2; /* Cream footer */
+    color: #333;
+    text-align: center;
+    padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+    header {
+        height: 60vh; /* Further reduce height for mobile */
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header p {
+        font-size: 1.2rem;
+    }
+
+    .couple-profiles {
+        flex-direction: column;
+    }
+
+    .profile {
+        width: 100%;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .invitation h2 {
+        font-size: 2rem;
+    }
+
+    .invitation h3 {
+        font-size: 2.5rem;
+    }
+
+    .event {
+        width: 100%;
+    }
+}
